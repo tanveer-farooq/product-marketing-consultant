@@ -34,7 +34,7 @@ Personal site and portfolio for a freelance product marketing consultant serving
 
 1. Set `site` in `astro.config.mjs` to the real domain.
 2. Fill every TODO in `src/data/site.ts` and the `[bracketed]` placeholders in `src/pages/about.astro`, `src/pages/index.astro` and `src/data/engagement.ts`.
-3. Replace `$[X]` prices in `src/data/services.ts`, or change them to `Quoted per project`.
+3. Review the prices in `src/data/services.ts` (set at the low end of 2026 US market ranges).
 4. Set real case studies to `draft: false` and remove the template ones.
 5. Run `npm run og`, then `npm run check` and `npm run build`.
 

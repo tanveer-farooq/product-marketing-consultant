@@ -8,7 +8,7 @@ export type Service = {
   forWho: string;
   includes: string[];
   timeline: string;
-  price: string; // TODO: real numbers, or 'Quoted per project' to hide pricing
+  price: string; // 'From' prices at the low end of 2026 US market ranges; quote ranges in proposals
   entry?: boolean; // "start here" badge
 };
 
@@ -30,7 +30,7 @@ export const services: Service[] = [
       '60-minute readout with your team.',
     ],
     timeline: '2 weeks',
-    price: 'From $[X]',
+    price: 'From $7,500',
   },
   {
     id: 'positioning-messaging',
@@ -49,7 +49,7 @@ export const services: Service[] = [
       'Category and naming recommendations where needed.',
     ],
     timeline: '3 to 4 weeks',
-    price: 'From $[X]',
+    price: 'From $15,000',
   },
   {
     id: 'launch',
@@ -71,7 +71,7 @@ export const services: Service[] = [
       '30-day post-launch review.',
     ],
     timeline: '4 to 6 weeks per launch',
-    price: 'From $[X] per launch',
+    price: 'From $12,000 per launch',
   },
   {
     id: 'competitive',
@@ -90,7 +90,7 @@ export const services: Service[] = [
       'Quarterly refresh available.',
     ],
     timeline: '3 weeks',
-    price: 'From $[X]. Refresh from $[X] per quarter',
+    price: 'From $9,000. Quarterly refresh from $2,500',
   },
   {
     id: 'content',
@@ -112,7 +112,7 @@ export const services: Service[] = [
       'Monthly report on rankings, citations and pipeline.',
     ],
     timeline: 'Monthly, three-month minimum',
-    price: 'From $[X] per month',
+    price: 'From $6,000 per month for four pieces',
   },
   {
     id: 'fractional',
@@ -128,7 +128,7 @@ export const services: Service[] = [
       'Handover plan for when you hire in-house.',
     ],
     timeline: 'Monthly, three-month minimum',
-    price: 'From $[X] per month for two days a week',
+    price: 'From $9,500 per month for two days a week',
   },
 ];
 
