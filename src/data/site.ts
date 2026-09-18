@@ -12,8 +12,8 @@ export const site = {
   location: 'Delhi, India',
   regions: 'North America and Europe',
   booking: '', // TODO: e.g. 'https://cal.com/yourhandle/intro'. Empty falls back to email.
-  linkedin: '', // TODO: e.g. 'https://www.linkedin.com/in/yourhandle/'
-  headshot: '', // TODO: e.g. '/headshot.jpg' placed in public/. Empty shows a monogram.
+  linkedin: 'https://www.linkedin.com/in/tanveer-farooq-527500104/',
+  headshot: '/headshot.jpg', // in public/, 800x1000. Empty shows a monogram.
   web3formsKey: '', // Optional: Web3Forms access key. Empty hides the contact form.
   cloudflareAnalyticsToken: '', // Optional: Cloudflare Web Analytics token. Empty disables the beacon.
   nav: [

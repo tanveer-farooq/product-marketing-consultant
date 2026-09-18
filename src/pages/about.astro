@@ -4,7 +4,8 @@ import Button from '../components/Button.astro';
 import Cta from '../components/Cta.astro';
 import JsonLd from '../components/JsonLd.astro';
 import { site, bookingHref, ctaLabel } from '../data/site';
-import { abs } from '../lib/url';
+import { href, abs } from '../lib/url';
+import LinkedInIcon from '../components/LinkedInIcon.astro';
 
 const lessons = [
   "Positioning comes from interviews, not brainstorms. The customer's alternative tells you what to say.",
@@ -31,6 +32,7 @@ const person = {
   url: abs('/about/', Astro.site),
   email: `mailto:${site.email}`,
   ...(site.linkedin ? { sameAs: [site.linkedin] } : {}),
+  ...(site.headshot ? { image: abs(site.headshot, Astro.site) } : {}),
 };
 ---
 
@@ -92,7 +94,7 @@ const person = {
         <div class="card-hard p-2">
           {
             site.headshot ? (
-              <img src={site.headshot} alt={site.name} width="480" height="480" class="aspect-square w-full rounded-md object-cover" />
+              <img src={href(site.headshot)} alt={site.name} width="800" height="1000" class="aspect-[4/5] w-full rounded-md object-cover object-top" />
             ) : (
               <div aria-hidden="true" class="flex aspect-square w-full items-center justify-center rounded-md bg-surface-2">
                 <span class="text-gradient text-8xl font-black">{site.name.charAt(0)}</span>
@@ -104,9 +106,9 @@ const person = {
           <Button href={bookingHref}>{ctaLabel}</Button>
           {
             site.linkedin && (
-              <Button href={site.linkedin} variant="outline">
-                LinkedIn
-              </Button>
+              <a href={site.linkedin} target="_blank" rel="me noopener" class="btn btn-outline">
+                <LinkedInIcon /> Connect on LinkedIn
+              </a>
             )
           }
           <a href={`mailto:${site.email}`} class="text-center text-sm font-bold text-muted transition-colors hover:text-pink">{site.email}</a>

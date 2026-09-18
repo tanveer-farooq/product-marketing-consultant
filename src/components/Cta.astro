@@ -1,6 +1,7 @@
 ---
 import Button from './Button.astro';
 import { site, bookingHref, ctaLabel } from '../data/site';
+import LinkedInIcon from './LinkedInIcon.astro';
 
 interface Props {
   title?: string;
@@ -23,6 +24,13 @@ const {
         site.booking && (
           <a href={`mailto:${site.email}`} class="font-bold underline-offset-4 hover:underline">
             or email {site.email}
+          </a>
+        )
+      }
+      {
+        site.linkedin && (
+          <a href={site.linkedin} target="_blank" rel="me noopener" class="btn btn-outline btn-lg">
+            <LinkedInIcon /> Connect on LinkedIn
           </a>
         )
       }

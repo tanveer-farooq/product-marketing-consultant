@@ -1,6 +1,7 @@
 ---
 import { site } from '../data/site';
 import { href } from '../lib/url';
+import LinkedInIcon from './LinkedInIcon.astro';
 
 const year = new Date().getFullYear();
 ---
@@ -29,8 +30,8 @@ const year = new Date().getFullYear();
       {
         site.linkedin && (
           <p class="mt-1">
-            <a href={site.linkedin} rel="me noopener" class="font-bold transition-colors hover:text-pink">
-              LinkedIn
+            <a href={site.linkedin} target="_blank" rel="me noopener" class="inline-flex items-center gap-2 font-bold transition-colors hover:text-pink">
+              <LinkedInIcon class="size-4" /> LinkedIn
             </a>
           </p>
         )

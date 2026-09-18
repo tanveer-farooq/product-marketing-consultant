@@ -1,6 +1,7 @@
 ---
 import { site, bookingHref, ctaLabel } from '../data/site';
 import { href } from '../lib/url';
+import LinkedInIcon from './LinkedInIcon.astro';
 
 const current = Astro.url.pathname;
 const isActive = (href: string) => current.startsWith(href.replace(/\/$/, ''));
@@ -22,6 +23,13 @@ const isActive = (href: string) => current.startsWith(href.replace(/\/$/, ''));
           </a>
         ))
       }
+      {
+        site.linkedin && (
+          <a href={site.linkedin} target="_blank" rel="me noopener" aria-label="LinkedIn profile" class="text-fg/80 transition-colors hover:text-pink">
+            <LinkedInIcon />
+          </a>
+        )
+      }
       <a href={bookingHref} class="btn btn-gradient btn-sm">{ctaLabel}</a>
     </nav>
 
@@ -34,6 +42,13 @@ const isActive = (href: string) => current.startsWith(href.replace(/\/$/, ''));
               {item.label}
             </a>
           ))
+        }
+        {
+          site.linkedin && (
+            <a href={site.linkedin} target="_blank" rel="me noopener" class="flex items-center gap-2 rounded-lg px-3 py-2 font-bold transition-colors hover:bg-surface-2 hover:text-pink">
+              <LinkedInIcon /> LinkedIn
+            </a>
+          )
         }
         <a href={bookingHref} class="btn btn-gradient mt-1">{ctaLabel}</a>
       </div>
