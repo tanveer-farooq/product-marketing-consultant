@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Cta from '../components/Cta.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { site, bookingHref, ctaLabel } from '../data/site';
+
+const lessons = [
+  "Positioning comes from interviews, not brainstorms. The customer's alternative tells you what to say.",
+  'Developers are the toughest audience and the easiest to write for. They want specifics. Give them specifics.',
+  'A launch is a date and a list. Most launches fail on the list.',
+];
+
+const howIWork = [
+  'Fixed scope, fixed price, fixed dates.',
+  'Weekly check-ins and drafts you can see early.',
+  'Everything in editable files you own.',
+  'I say no to work I am not the right person for, and I will tell you who is.',
+];
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: 'Product marketing consultant',
+  description: site.description,
+  url: new URL('/about/', Astro.site).href,
+  email: `mailto:${site.email}`,
+  ...(site.linkedin ? { sameAs: [site.linkedin] } : {}),
+};
+---
+
+<Base
+  title="About"
+  description={`${site.name} is a freelance product marketer with in-house experience at a developer-facing test-automation company. Positioning, launches, competitive intel and SEO for technical companies.`}
+>
+  <JsonLd slot="head" data={person} />
+
+  <section class="py-16 md:py-24">
+    <div class="container-site grid gap-12 lg:grid-cols-[2fr_1fr]">
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight md:text-5xl">{site.name}</h1>
+        <p class="mt-3 text-lg text-muted">
+          Product marketer for technical products. Based in {site.location}. Working with teams in {site.regions}.
+        </p>
+
+        <div class="prose prose-lg mt-10 max-w-none">
+          <p>
+            I am a product marketer who spent [N] years inside a developer-facing test-automation company [confirm:
+            including a company-wide rebrand and repositioning]. I owned positioning for [N] products, ran launches,
+            built the competitive program, and led SEO and AI-search visibility work, including brand-mention and
+            backlink programs after the rebrand.
+          </p>
+          <p>That work taught me three things I now bring to clients:</p>
+          <ol>
+            {lessons.map((l) => <li>{l}</li>)}
+          </ol>
+
+          <h2>How I work</h2>
+          <ul>
+            {howIWork.map((h) => <li>{h}</li>)}
+          </ul>
+
+          <h2>Tools I actually use</h2>
+          <p>[Ahrefs, Google Search Console, Figma, Google Docs or Notion, Claude, Linear or Jira, HubSpot or Attio]</p>
+        </div>
+      </div>
+
+      <aside class="lg:pt-2">
+        {
+          site.headshot ? (
+            <img
+              src={site.headshot}
+              alt={site.name}
+              width="480"
+              height="480"
+              class="aspect-square w-full rounded-2xl object-cover"
+            />
+          ) : (
+            <div
+              aria-hidden="true"
+              class="flex aspect-square w-full items-center justify-center rounded-2xl bg-surface text-7xl font-semibold text-muted"
+            >
+              {site.name.charAt(0)}
+            </div>
+          )
+        }
+        <div class="mt-6 flex flex-col gap-3">
+          <Button href={bookingHref}>{ctaLabel}</Button>
+          {
+            site.linkedin && (
+              <Button href={site.linkedin} variant="secondary">
+                LinkedIn
+              </Button>
+            )
+          }
+          <a href={`mailto:${site.email}`} class="text-center text-sm text-muted hover:text-fg">{site.email}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Cta
+    title="Working on something?"
+    body="Book a call and describe the problem. I will tell you which offer fits, or that none of them do."
+  />
+</Base>

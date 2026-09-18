@@ -1,0 +1,48 @@
+---
+import { site, bookingHref, ctaLabel } from '../data/site';
+
+const current = Astro.url.pathname;
+const isActive = (href: string) => current.startsWith(href.replace(/\/$/, ''));
+---
+
+<header class="border-b border-line">
+  <div class="container-site flex items-center justify-between gap-6 py-4">
+    <a href="/" class="font-semibold tracking-tight text-fg">{site.name}</a>
+
+    <nav aria-label="Main" class="hidden items-center gap-6 text-sm md:flex">
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class="text-muted transition-colors hover:text-fg aria-[current=page]:text-fg"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={bookingHref}
+        class="rounded-md bg-accent px-3.5 py-2 font-medium text-accent-fg transition-colors hover:bg-accent-strong"
+      >
+        {ctaLabel}
+      </a>
+    </nav>
+
+    <details class="relative md:hidden">
+      <summary class="cursor-pointer list-none rounded-md border border-line px-3 py-1.5 text-sm select-none">Menu</summary>
+      <div class="absolute right-0 z-40 mt-2 flex w-56 flex-col gap-1 rounded-lg border border-line bg-bg p-2 shadow-lg">
+        {
+          site.nav.map((item) => (
+            <a href={item.href} class="rounded-md px-3 py-2 text-sm hover:bg-surface">
+              {item.label}
+            </a>
+          ))
+        }
+        <a href={bookingHref} class="mt-1 rounded-md bg-accent px-3 py-2 text-center text-sm font-medium text-accent-fg">
+          {ctaLabel}
+        </a>
+      </div>
+    </details>
+  </div>
+</header>

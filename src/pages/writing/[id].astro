@@ -1,0 +1,37 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import { formatDate, getPosts } from '../../lib/content';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+const d = post.data;
+---
+
+<Base title={d.title} description={d.description} type="article">
+  <article class="py-16 md:py-24">
+    <div class="container-site max-w-3xl">
+      <p class="text-sm text-muted">
+        <a href="/writing/" class="hover:text-fg">Writing</a> /
+        <time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>{d.draft && ' / DRAFT'}
+      </p>
+      <h1 class="mt-3 text-3xl font-semibold tracking-tight text-balance md:text-5xl">{d.title}</h1>
+      <p class="mt-4 text-lg text-muted">{d.description}</p>
+      <div class="prose prose-lg mt-10 max-w-none">
+        <Content />
+      </div>
+      {d.tags.length > 0 && <p class="mt-10 text-sm text-muted">Tags: {d.tags.join(', ')}</p>}
+    </div>
+  </article>
+
+  <Cta />
+</Base>

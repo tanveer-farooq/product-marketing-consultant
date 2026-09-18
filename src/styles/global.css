@@ -1,1 +1,126 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+  Semantic colour tokens. Light by default, dark follows the system preference.
+  Utilities: bg-bg, bg-surface, text-fg, text-muted, border-line, bg-accent, text-accent,
+  text-accent-fg, bg-accent-soft, hover:bg-accent-strong.
+*/
+:root {
+  --bg: oklch(0.99 0.004 90);
+  --surface: oklch(0.965 0.006 90);
+  --fg: oklch(0.2 0.015 260);
+  --muted: oklch(0.48 0.02 260);
+  --line: oklch(0.88 0.01 260);
+  --accent: oklch(0.5 0.2 262);
+  --accent-strong: oklch(0.42 0.2 262);
+  --accent-fg: oklch(0.99 0 0);
+  --accent-soft: oklch(0.94 0.04 262);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: oklch(0.16 0.012 260);
+    --surface: oklch(0.2 0.012 260);
+    --fg: oklch(0.95 0.008 90);
+    --muted: oklch(0.7 0.02 260);
+    --line: oklch(0.29 0.014 260);
+    --accent: oklch(0.76 0.15 262);
+    --accent-strong: oklch(0.82 0.13 262);
+    --accent-fg: oklch(0.15 0.03 262);
+    --accent-soft: oklch(0.26 0.06 262);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-fg);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .container-site {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 40rem) {
+    .container-site {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .filter-chip {
+    @apply rounded-full border border-line px-3.5 py-1.5 text-sm transition-colors hover:border-accent;
+  }
+  .filter-chip[aria-pressed="true"] {
+    background: var(--color-fg);
+    color: var(--color-bg);
+    border-color: var(--color-fg);
+  }
+
+  .field {
+    @apply w-full rounded-md border border-line bg-bg px-3 py-2 text-base text-fg;
+  }
+  .field:focus {
+    border-color: var(--color-accent);
+    outline: none;
+  }
+
+  /* Map the typography plugin onto the semantic tokens so prose follows light/dark automatically. */
+  .prose {
+    --tw-prose-body: var(--color-fg);
+    --tw-prose-headings: var(--color-fg);
+    --tw-prose-lead: var(--color-muted);
+    --tw-prose-links: var(--color-accent);
+    --tw-prose-bold: var(--color-fg);
+    --tw-prose-counters: var(--color-muted);
+    --tw-prose-bullets: var(--color-muted);
+    --tw-prose-hr: var(--color-line);
+    --tw-prose-quotes: var(--color-fg);
+    --tw-prose-quote-borders: var(--color-line);
+    --tw-prose-captions: var(--color-muted);
+    --tw-prose-code: var(--color-fg);
+    --tw-prose-pre-code: var(--color-fg);
+    --tw-prose-pre-bg: var(--color-surface);
+    --tw-prose-th-borders: var(--color-line);
+    --tw-prose-td-borders: var(--color-line);
+  }
+}

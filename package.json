@@ -1,5 +1,5 @@
 {
-  "name": "site",
+  "name": "consultant-site",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,7 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "og": "node scripts/og.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.1",
@@ -23,5 +25,11 @@
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@tailwindcss/typography": "^0.5.20",
+    "sharp": "^0.35.4",
+    "typescript": "^6.0.3"
   }
 }

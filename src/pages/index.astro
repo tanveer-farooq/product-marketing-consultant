@@ -1,17 +1,185 @@
 ---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import WorkCard from '../components/WorkCard.astro';
+import PostCard from '../components/PostCard.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Cta from '../components/Cta.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { site, bookingHref, ctaLabel } from '../data/site';
+import { coreServices } from '../data/services';
+import { engagementSteps } from '../data/engagement';
+import { getWork, getPosts } from '../lib/content';
 
+const featured = (await getWork()).filter((w) => w.data.featured).slice(0, 3);
+const posts = (await getPosts()).slice(0, 3);
+
+const fits = [
+  'Your website does not say what you do, or says it the same way three competitors do.',
+  'A launch is coming next quarter and nobody owns it end to end.',
+  'Sales keeps losing to the same two competitors and has nothing to counter with.',
+  'You publish content, but Google and AI assistants send buyers elsewhere.',
+];
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: 'Product marketing consultant',
+  description: site.description,
+  url: Astro.site?.href,
+  email: `mailto:${site.email}`,
+  ...(site.linkedin ? { sameAs: [site.linkedin] } : {}),
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title={`${site.name} | Product marketing consultant for AI, developer and security companies`}
+  description={site.description}
+  fullTitle
+>
+  <JsonLd slot="head" data={person} />
+
+  <section class="py-20 md:py-28">
+    <div class="container-site">
+      <p class="mb-4 text-sm font-medium tracking-wide text-accent uppercase">
+        Product marketing for AI, developer, QA and security companies
+      </p>
+      <h1 class="max-w-4xl text-4xl font-semibold tracking-tight text-balance md:text-6xl">
+        Product marketing for technical products.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-muted md:text-xl">
+        I help technical companies say what they do, launch what they build, and get found by the people who buy it.
+        Positioning, launches, competitive intel and content, done by someone who has shipped all four inside a
+        developer company.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <Button href={bookingHref}>{ctaLabel}</Button>
+        <Button href="/work/" variant="secondary">See the work</Button>
+      </div>
+    </div>
+  </section>
+
+  {
+    site.proof.length > 0 && (
+      <section class="border-y border-line bg-surface">
+        <div class="container-site grid gap-6 py-8 sm:grid-cols-3">
+          {site.proof.map((p) => (
+            <div>
+              <p class="text-2xl font-semibold tracking-tight">{p.value}</p>
+              <p class="mt-1 text-sm text-muted">{p.label}</p>
+            </div>
+          ))}
+          <p class="text-xs text-muted sm:col-span-3">Client names withheld under NDA. Details on a call.</p>
+        </div>
+      </section>
+    )
+  }
+
+  <Section title={'For technical companies at the point where "the founder explains it" stops scaling.'}>
+    <div class="grid gap-10 md:grid-cols-2">
+      <div>
+        <p class="text-lg text-muted">
+          You sell to developers, engineering leaders, security teams or IT. You are seed to Series B, 10 to 100 people,
+          and at least one of these is true:
+        </p>
+        <ul class="mt-6 space-y-3">
+          {
+            fits.map((f) => (
+              <li class="flex gap-3">
+                <span aria-hidden="true" class="mt-2.5 size-2 shrink-0 rounded-full bg-accent" />
+                <span>{f}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="rounded-xl border border-line p-6 text-muted md:mt-2">
+        <p class="font-medium text-fg">Not a fit</p>
+        <p class="mt-2">
+          Consumer products, agencies, paid-ads or social management, or a company that needs a twelve-person team.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="services" title="Four things I do. Each one ships as a finished asset, not a deck." class="bg-surface/50">
+    <div class="grid gap-6 md:grid-cols-2">
+      {coreServices.map((s) => <ServiceCard service={s} />)}
+    </div>
+    <p class="mt-8">
+      <a href="/services/" class="font-medium text-accent hover:underline">All services and pricing</a>
+    </p>
+  </Section>
+
+  <Section title="How an engagement runs">
+    <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      {
+        engagementSteps.map((step, i) => (
+          <li class="rounded-xl border border-line p-5">
+            <p class="text-sm font-medium text-accent">Step {i + 1}</p>
+            <h3 class="mt-2 font-semibold">{step.title}</h3>
+            <p class="mt-2 text-sm text-muted">{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  {
+    featured.length > 0 && (
+      <Section
+        title="Selected work"
+        intro="Real engagements, anonymised. Client names are withheld under NDA. The numbers are real but rounded."
+        class="bg-surface/50"
+      >
+        <div class="grid gap-6 md:grid-cols-3">
+          {featured.map((entry) => (
+            <WorkCard entry={entry} />
+          ))}
+        </div>
+        <p class="mt-8">
+          <a href="/work/" class="font-medium text-accent hover:underline">
+            All case studies
+          </a>
+        </p>
+      </Section>
+    )
+  }
+
+  <Section title="Why hire a product marketer who has done it in-house">
+    <div class="max-w-3xl">
+      <p class="text-lg text-muted">
+        I spent [N] years inside a developer-facing test-automation company, owning positioning, launches, competitive
+        research and SEO. I know what a launch looks like from inside the standup, and what developers do with marketing
+        copy they do not trust. That is the work I now do for technical companies that cannot hire a full-time PMM yet.
+      </p>
+      <p class="mt-6">
+        <a href="/about/" class="font-medium text-accent hover:underline">More about me</a>
+      </p>
+    </div>
+  </Section>
+
+  <Testimonials />
+
+  {
+    posts.length > 0 && (
+      <Section title="Writing" intro="Positioning teardowns and notes on marketing technical products.">
+        <div class="max-w-3xl">
+          {posts.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </div>
+        <p class="mt-8">
+          <a href="/writing/" class="font-medium text-accent hover:underline">
+            All writing
+          </a>
+        </p>
+      </Section>
+    )
+  }
+
+  <Cta />
+</Base>

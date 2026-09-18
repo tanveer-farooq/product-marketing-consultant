@@ -1,0 +1,20 @@
+---
+import { testimonials } from '../data/testimonials';
+---
+
+{
+  testimonials.length > 0 && (
+    <section class="py-16 md:py-24">
+      <div class="container-site grid gap-6 md:grid-cols-2">
+        {testimonials.map((t) => (
+          <figure class="rounded-xl border border-line p-6">
+            <blockquote class="text-lg">“{t.quote}”</blockquote>
+            <figcaption class="mt-4 text-sm text-muted">
+              {t.name}, {t.role}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )
+}

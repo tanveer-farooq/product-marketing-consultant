@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-line">
+  <div class="container-site grid gap-8 py-12 md:grid-cols-3">
+    <div>
+      <p class="font-semibold">{site.name}</p>
+      <p class="mt-2 max-w-xs text-sm text-muted">{site.title}. {site.tagline}</p>
+    </div>
+
+    <nav aria-label="Footer" class="grid grid-cols-2 gap-2 text-sm">
+      {
+        site.nav.map((item) => (
+          <a href={item.href} class="text-muted hover:text-fg">
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/contact/" class="text-muted hover:text-fg">Contact</a>
+      <a href="/rss.xml" class="text-muted hover:text-fg">RSS</a>
+    </nav>
+
+    <div class="text-sm text-muted">
+      <p><a href={`mailto:${site.email}`} class="hover:text-fg">{site.email}</a></p>
+      {
+        site.linkedin && (
+          <p class="mt-1">
+            <a href={site.linkedin} rel="me noopener" class="hover:text-fg">
+              LinkedIn
+            </a>
+          </p>
+        )
+      }
+      <p class="mt-4">Client names in case studies are withheld under NDA.</p>
+      <p class="mt-1">&copy; {year} {site.name}</p>
+    </div>
+  </div>
+</footer>

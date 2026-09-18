@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { segments } from '../data/segments';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+}
+
+const { entry } = Astro.props;
+const { title, client, segment, summary, outcomes, draft } = entry.data;
+---
+
+<a
+  href={`/work/${entry.id}/`}
+  data-segment={segment}
+  class="group flex flex-col rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent"
+>
+  <p class="text-sm text-muted">
+    {segments[segment]} · {client}{draft && ' · DRAFT'}
+  </p>
+  <h3 class="mt-2 text-xl font-semibold tracking-tight group-hover:text-accent">{title}</h3>
+  <p class="mt-3 flex-1 text-muted">{summary}</p>
+  {
+    outcomes.length > 0 && (
+      <dl class="mt-5 grid grid-cols-2 gap-3">
+        {outcomes.slice(0, 2).map((o) => (
+          <div class="flex flex-col-reverse">
+            <dt class="text-xs tracking-wide text-muted uppercase">{o.label}</dt>
+            <dd class="text-lg font-semibold">{o.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+</a>
