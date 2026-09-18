@@ -5,15 +5,22 @@ import { testimonials } from '../data/testimonials';
 {
   testimonials.length > 0 && (
     <section class="py-16 md:py-24">
-      <div class="container-site grid gap-6 md:grid-cols-2">
-        {testimonials.map((t) => (
-          <figure class="rounded-xl border border-line p-6">
-            <blockquote class="text-lg">“{t.quote}”</blockquote>
-            <figcaption class="mt-4 text-sm text-muted">
-              {t.name}, {t.role}
-            </figcaption>
-          </figure>
-        ))}
+      <div class="container-site">
+        <h2 class="mb-10 text-center text-3xl md:text-[2.5rem]">What clients say 💬</h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t) => (
+            <figure class="card-hard flex h-full flex-col justify-between p-8">
+              <div>
+                {t.photo && <img src={t.photo} alt="" width="120" height="120" class="mb-6 size-[120px] rounded-lg object-cover" />}
+                <blockquote class="text-lg font-semibold">“{t.quote}”</blockquote>
+              </div>
+              <figcaption class="mt-6">
+                <p class="text-lg font-extrabold">{t.name}</p>
+                <p class="text-sm font-bold text-muted">{t.role}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+import { services } from '../data/services';
+import { bookingHref, ctaLabel } from '../data/site';
+
+const sprint = services.find((s) => s.entry) ?? services[0];
+const highlights = [
+  'Interviews with founders, engineers and customers',
+  'Competitive alternatives map',
+  'Positioning document and messaging hierarchy',
+  'Homepage hero and one key page rewritten',
+];
+---
+
+<div class="card-hard p-6 md:p-8">
+  <div class="flex items-center justify-between gap-3">
+    <span class="pill pill-pink">⚡ Start here</span>
+    <span class="text-sm font-bold text-muted">{sprint.timeline}</span>
+  </div>
+  <h2 class="mt-4 text-2xl md:text-3xl">{sprint.name}</h2>
+  <p class="mt-2 text-muted">{sprint.tagline}</p>
+  <ul class="mt-5 space-y-2 text-[0.95rem] font-semibold">
+    {
+      highlights.map((h) => (
+        <li class="flex gap-2">
+          <span aria-hidden="true">✅</span>
+          <span>{h}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-5 text-sm font-extrabold">{sprint.price}</p>
+  <div class="mt-5 flex flex-wrap gap-3">
+    <Button href={bookingHref} variant="violet">{ctaLabel}</Button>
+    <a href={`/services/#${sprint.id}`} class="btn btn-outline">Everything included</a>
+  </div>
+</div>

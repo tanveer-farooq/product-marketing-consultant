@@ -11,14 +11,16 @@ const posts = await getPosts();
   title="Writing"
   description="Positioning teardowns and notes on marketing technical products: AI, developer tools, QA and security."
 >
-  <section class="py-16 md:py-24">
+  <section class="bg-orb py-16 md:py-24">
     <div class="container-site">
-      <h1 class="text-3xl font-semibold tracking-tight md:text-5xl">Writing</h1>
-      <p class="mt-4 max-w-2xl text-lg text-muted">
-        Positioning teardowns and notes on marketing technical products. <a href="/rss.xml" class="text-accent hover:underline">RSS</a>
+      <p class="mb-3 text-sm font-extrabold tracking-wide text-pink uppercase">Writing</p>
+      <h1 class="text-5xl md:text-6xl">Teardowns and <span class="text-gradient">notes</span> ✍️</h1>
+      <p class="mt-5 max-w-2xl text-lg text-muted">
+        Positioning teardowns and notes on marketing technical products.
+        <a href="/rss.xml" class="font-bold text-pink underline-offset-4 hover:underline">RSS</a>
       </p>
 
-      <div class="mt-10 max-w-3xl">
+      <div class="mt-10 grid max-w-3xl gap-4">
         {
           posts.length > 0 ? (
             posts.map((post) => <PostCard post={post} />)

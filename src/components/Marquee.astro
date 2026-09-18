@@ -1,0 +1,27 @@
+---
+import { marqueeItems } from '../data/marquee';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Finished assets, not slide decks 📦' } = Astro.props;
+---
+
+<section class="py-12 md:py-16">
+  <p class="container-site mb-6 text-center text-lg font-extrabold">{title}</p>
+  <div class="marquee">
+    {
+      [0, 1].map((copy) => (
+        <div class="marquee-track" aria-hidden={copy === 1 ? 'true' : undefined}>
+          {marqueeItems.map((item) => (
+            <span class="pill-item">
+              <span aria-hidden="true">{item.emoji}</span>
+              {item.label}
+            </span>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</section>

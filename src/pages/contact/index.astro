@@ -12,46 +12,47 @@ const redirect = new URL('/contact/thanks/', Astro.site).href;
   title="Contact"
   description="Book a 30-minute call or send a note about your positioning, launch, competitive or content project."
 >
-  <section class="py-16 md:py-24">
+  <section class="bg-orb py-16 md:py-24">
     <div class="container-site grid gap-12 lg:grid-cols-2">
       <div>
-        <h1 class="text-3xl font-semibold tracking-tight text-balance md:text-5xl">
-          Tell me what you are launching or repositioning.
-        </h1>
-        <p class="mt-4 text-lg text-muted">
+        <p class="mb-3 text-sm font-extrabold tracking-wide text-pink uppercase">Contact</p>
+        <h1 class="text-5xl md:text-6xl">Tell me what you are <span class="text-gradient">launching</span> or repositioning.</h1>
+        <p class="mt-5 text-lg text-muted">
           The fastest route is a 30-minute call. If you would rather write, the form or email works. I reply within one
           business day.
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <Button href={bookingHref}>{ctaLabel}</Button>
-          {site.booking && (
-            <Button href={`mailto:${site.email}`} variant="secondary">
-              Email {site.email}
-            </Button>
-          )}
+          <Button href={bookingHref} size="lg">{ctaLabel}</Button>
+          {
+            site.booking && (
+              <Button href={`mailto:${site.email}`} variant="outline" size="lg">
+                Email {site.email}
+              </Button>
+            )
+          }
         </div>
       </div>
 
       {
         site.web3formsKey ? (
-          <form action="https://api.web3forms.com/submit" method="POST" class="grid gap-4 rounded-2xl border border-line p-6">
+          <form action="https://api.web3forms.com/submit" method="POST" class="card-hard grid gap-5 p-6 md:p-8">
             <input type="hidden" name="access_key" value={site.web3formsKey} />
             <input type="hidden" name="subject" value="New enquiry from the website" />
             <input type="hidden" name="redirect" value={redirect} />
             <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
-            <label class="grid gap-1 text-sm">
+            <label class="grid gap-2 text-sm font-bold">
               <span>Name</span>
               <input name="name" required autocomplete="name" class="field" />
             </label>
-            <label class="grid gap-1 text-sm">
+            <label class="grid gap-2 text-sm font-bold">
               <span>Work email</span>
               <input name="email" type="email" required autocomplete="email" class="field" />
             </label>
-            <label class="grid gap-1 text-sm">
+            <label class="grid gap-2 text-sm font-bold">
               <span>Company website</span>
               <input name="website" type="url" placeholder="https://" class="field" />
             </label>
-            <label class="grid gap-1 text-sm">
+            <label class="grid gap-2 text-sm font-bold">
               <span>What do you need?</span>
               <select name="need" class="field">
                 {needs.map((n) => (
@@ -59,7 +60,7 @@ const redirect = new URL('/contact/thanks/', Astro.site).href;
                 ))}
               </select>
             </label>
-            <label class="grid gap-1 text-sm">
+            <label class="grid gap-2 text-sm font-bold">
               <span>When?</span>
               <select name="timing" class="field">
                 {timing.map((t) => (
@@ -67,28 +68,23 @@ const redirect = new URL('/contact/thanks/', Astro.site).href;
                 ))}
               </select>
             </label>
-            <label class="grid gap-1 text-sm">
+            <label class="grid gap-2 text-sm font-bold">
               <span>Anything else</span>
               <textarea name="message" rows="4" class="field" />
             </label>
-            <button
-              type="submit"
-              class="rounded-md bg-accent px-5 py-3 font-medium text-accent-fg transition-colors hover:bg-accent-strong"
-            >
+            <button type="submit" class="btn btn-violet mt-2">
               Send
             </button>
-            <p class="text-xs text-muted">
-              No newsletters, no sequences. Your details are used to reply to you and nothing else.
-            </p>
+            <p class="text-xs text-muted">No newsletters, no sequences. Your details are used to reply to you and nothing else.</p>
           </form>
         ) : (
-          <div class="rounded-2xl border border-line p-6 text-muted">
-            <p class="font-medium text-fg">Prefer email?</p>
-            <p class="mt-2">
+          <div class="card-hard p-8">
+            <span class="pill pill-pink">✉️ Prefer email?</span>
+            <p class="mt-4 text-lg font-semibold">
               Send a few lines about what you are working on and when you need it. I reply within one business day.
             </p>
-            <p class="mt-4">
-              <a href={`mailto:${site.email}`} class="font-medium text-accent hover:underline">
+            <p class="mt-5">
+              <a href={`mailto:${site.email}`} class="text-xl font-extrabold text-pink underline-offset-4 hover:underline">
                 {site.email}
               </a>
             </p>

@@ -1,16 +1,20 @@
 ---
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary';
+  variant?: 'gradient' | 'violet' | 'outline' | 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
   class?: string;
 }
 
-const { href, variant = 'primary', class: className = '' } = Astro.props;
-const base = 'inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-medium transition-colors';
-const styles =
-  variant === 'primary'
-    ? 'bg-accent text-accent-fg hover:bg-accent-strong'
-    : 'border border-line text-fg hover:bg-surface';
+const { href, variant = 'gradient', size = 'md', class: className = '' } = Astro.props;
+const variants = {
+  gradient: 'btn-gradient',
+  primary: 'btn-gradient',
+  violet: 'btn-violet',
+  outline: 'btn-outline',
+  secondary: 'btn-outline',
+};
+const sizes = { sm: 'btn-sm', md: '', lg: 'btn-lg' };
 ---
 
-<a href={href} class={`${base} ${styles} ${className}`}><slot /></a>
+<a href={href} class={`btn ${variants[variant]} ${sizes[size]} ${className}`}><slot /></a>

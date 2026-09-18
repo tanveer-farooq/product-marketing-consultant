@@ -22,6 +22,16 @@ const ld = {
     })),
   },
 };
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
 ---
 
 <Base
@@ -29,48 +39,51 @@ const ld = {
   description="Fixed-scope product marketing engagements for AI, developer, QA and security companies: positioning sprint, launches, competitive intel, SEO / AI-search content, and fractional PMM."
 >
   <JsonLd slot="head" data={ld} />
+  <JsonLd slot="head" data={faqLd} />
 
-  <section class="py-16 md:py-24">
+  <section class="bg-orb py-16 md:py-24">
     <div class="container-site">
       <div class="max-w-3xl">
-        <h1 class="text-3xl font-semibold tracking-tight md:text-5xl">Services</h1>
-        <p class="mt-4 text-lg text-muted">
+        <h1 class="text-5xl md:text-6xl">Services and <span class="text-gradient">pricing</span></h1>
+        <p class="mt-5 text-lg text-muted">
           Every engagement is fixed scope, fixed price and fixed dates. You get editable source files and a walkthrough,
           and you own everything. Prices are starting points. A proposal follows the intro call.
         </p>
       </div>
 
-      <div class="mt-12">
+      <div class="mt-12 grid gap-6">
         {
           services.map((s) => (
-            <article id={s.id} class="grid scroll-mt-24 gap-6 border-t border-line py-12 md:grid-cols-[2fr_3fr] md:gap-12">
+            <article
+              id={s.id}
+              class={`card grid scroll-mt-24 gap-8 p-6 md:grid-cols-[2fr_3fr] md:p-10 ${s.entry ? 'card-pink' : ''}`}
+            >
               <div>
-                {s.entry && (
-                  <p class="mb-3 inline-block rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
-                    Start here
-                  </p>
-                )}
-                <h2 class="text-2xl font-semibold tracking-tight">{s.name}</h2>
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="text-3xl" aria-hidden="true">{s.emoji}</span>
+                  {s.entry && <span class="pill pill-pink">⚡ Start here</span>}
+                </div>
+                <h2 class="mt-4 text-2xl md:text-3xl">{s.name}</h2>
                 <p class="mt-2 text-muted">{s.tagline}</p>
                 <dl class="mt-6 grid grid-cols-2 gap-4 text-sm md:grid-cols-1">
                   <div>
-                    <dt class="text-muted">Timeline</dt>
-                    <dd class="font-medium">{s.timeline}</dd>
+                    <dt class="font-bold text-muted">Timeline</dt>
+                    <dd class="font-extrabold">{s.timeline}</dd>
                   </div>
                   <div>
-                    <dt class="text-muted">Price</dt>
-                    <dd class="font-medium">{s.price}</dd>
+                    <dt class="font-bold text-muted">Price</dt>
+                    <dd class="font-extrabold">{s.price}</dd>
                   </div>
                 </dl>
               </div>
               <div>
-                <p>
-                  <span class="font-medium">For:</span> {s.forWho}
+                <p class="font-bold">
+                  <span class="text-pink">For:</span> {s.forWho}
                 </p>
                 <ul class="mt-4 space-y-2">
                   {s.includes.map((item) => (
                     <li class="flex gap-3">
-                      <span aria-hidden="true" class="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                      <span aria-hidden="true">✅</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -83,24 +96,26 @@ const ld = {
     </div>
   </section>
 
-  <section class="border-t border-line bg-surface/50 py-16 md:py-24">
+  <section class="py-16 md:py-24">
     <div class="container-site">
-      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Questions I get asked</h2>
-      <dl class="mt-10 grid gap-8 md:grid-cols-2">
-        {
-          faq.map((item) => (
-            <div>
-              <dt class="text-lg font-semibold">{item.q}</dt>
-              <dd class="mt-2 text-muted">{item.a}</dd>
-            </div>
-          ))
-        }
-      </dl>
+      <div class="card card-pink mx-auto max-w-4xl p-6 md:p-10">
+        <h2 class="text-3xl md:text-[2.5rem]">Frequently asked questions</h2>
+        <div class="faq mt-6">
+          {
+            faq.map((item) => (
+              <details open>
+                <summary>{item.q}</summary>
+                <div>{item.a}</div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </section>
 
   <Cta
-    title="Not sure which one you need?"
+    title="Not sure which one you need? 🤔"
     body="Book a call and describe the problem. I will tell you which offer fits, or that none of them do."
   />
 </Base>

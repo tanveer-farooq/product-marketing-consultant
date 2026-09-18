@@ -1,5 +1,6 @@
 export type Service = {
   id: string; // anchor on /services/
+  emoji: string; // shown on cards
   name: string;
   pillar?: string; // shown on the homepage cards; only the four core services carry one
   short: string; // one-liner for cards
@@ -14,6 +15,7 @@ export type Service = {
 export const services: Service[] = [
   {
     id: 'positioning-sprint',
+    emoji: '⚡',
     name: 'Positioning Sprint',
     entry: true,
     short: 'Two weeks to a clear answer to "what do you do and why should I care?"',
@@ -32,6 +34,7 @@ export const services: Service[] = [
   },
   {
     id: 'positioning-messaging',
+    emoji: '🧭',
     name: 'Positioning & messaging',
     pillar: 'Say it clearly',
     short:
@@ -50,6 +53,7 @@ export const services: Service[] = [
   },
   {
     id: 'launch',
+    emoji: '🚀',
     name: 'Launch & go-to-market',
     pillar: 'Ship the launch',
     short: 'A plan, a narrative and every asset, shipped on the date you promised the board.',
@@ -71,6 +75,7 @@ export const services: Service[] = [
   },
   {
     id: 'competitive',
+    emoji: '⚔️',
     name: 'Competitive intel & sales enablement',
     pillar: 'Win the comparison',
     short: 'Teardowns, battlecards and objection handling your reps actually open before a call.',
@@ -89,6 +94,7 @@ export const services: Service[] = [
   },
   {
     id: 'content',
+    emoji: '🔎',
     name: 'SEO & AI-search content',
     pillar: 'Get found and cited',
     short:
@@ -110,6 +116,7 @@ export const services: Service[] = [
   },
   {
     id: 'fractional',
+    emoji: '🧑‍💻',
     name: 'Fractional product marketer',
     short: 'A product marketer in your standups, two or three days a week.',
     tagline: 'A product marketer in your standups, two or three days a week.',

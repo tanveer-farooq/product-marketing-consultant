@@ -9,12 +9,12 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<article class="border-t border-line py-6">
-  <p class="text-sm text-muted">
-    <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>{post.data.draft && ' · DRAFT'}
+<article class="card card-hover p-6">
+  <p class="text-sm font-bold text-muted">
+    <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>{post.data.draft && ' · Draft'}
   </p>
-  <h3 class="mt-1 text-xl font-semibold tracking-tight">
-    <a href={`/writing/${post.id}/`} class="hover:text-accent">{post.data.title}</a>
+  <h3 class="mt-2 text-xl">
+    <a href={`/writing/${post.id}/`} class="transition-colors hover:text-pink">{post.data.title}</a>
   </h3>
   <p class="mt-2 text-muted">{post.data.description}</p>
 </article>

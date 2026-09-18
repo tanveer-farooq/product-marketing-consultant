@@ -4,20 +4,27 @@ interface Props {
   eyebrow?: string;
   title?: string;
   intro?: string;
+  variant?: 'plain' | 'violet';
+  corners?: 'none' | 'tl-br' | 'tr';
+  center?: boolean;
   class?: string;
 }
 
-const { id, eyebrow, title, intro, class: className = '' } = Astro.props;
+const { id, eyebrow, title, intro, variant = 'plain', corners = 'none', center = false, class: className = '' } = Astro.props;
+const cornerClass = corners === 'tl-br' ? 'corner-tl corner-br' : corners === 'tr' ? 'corner-tr' : '';
+const variantClass = variant === 'violet' ? `section-violet ${cornerClass}` : '';
+const eyebrowClass = variant === 'violet' ? 'text-white/80' : 'text-pink';
+const introClass = variant === 'violet' ? 'text-white/85' : 'text-muted';
 ---
 
-<section id={id} class={`py-16 md:py-24 ${className}`}>
-  <div class="container-site">
+<section id={id} class={`py-16 md:py-24 ${variantClass} ${className}`}>
+  <div class={`container-site ${center ? 'text-center' : ''}`}>
     {
       (eyebrow || title || intro) && (
-        <div class="mb-10 max-w-2xl">
-          {eyebrow && <p class="mb-2 text-sm font-medium tracking-wide text-accent uppercase">{eyebrow}</p>}
-          {title && <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>}
-          {intro && <p class="mt-4 text-lg text-muted">{intro}</p>}
+        <div class={`mb-10 max-w-3xl ${center ? 'mx-auto' : ''}`}>
+          {eyebrow && <p class={`mb-3 text-sm font-extrabold tracking-wide uppercase ${eyebrowClass}`}>{eyebrow}</p>}
+          {title && <h2 class="text-3xl md:text-[2.5rem]">{title}</h2>}
+          {intro && <p class={`mt-4 text-lg font-semibold ${introClass}`}>{intro}</p>}
         </div>
       )
     }

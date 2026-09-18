@@ -5,43 +5,36 @@ const current = Astro.url.pathname;
 const isActive = (href: string) => current.startsWith(href.replace(/\/$/, ''));
 ---
 
-<header class="border-b border-line">
-  <div class="container-site flex items-center justify-between gap-6 py-4">
-    <a href="/" class="font-semibold tracking-tight text-fg">{site.name}</a>
+<header class="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur">
+  <div class="container-site flex h-[72px] items-center justify-between gap-6">
+    <a href="/" class="text-xl font-black tracking-tight text-fg transition-colors hover:text-pink">{site.name}</a>
 
-    <nav aria-label="Main" class="hidden items-center gap-6 text-sm md:flex">
+    <nav aria-label="Main" class="hidden items-center gap-7 text-[0.95rem] font-bold md:flex">
       {
         site.nav.map((item) => (
           <a
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
-            class="text-muted transition-colors hover:text-fg aria-[current=page]:text-fg"
+            class="text-fg/80 transition-colors hover:text-pink aria-[current=page]:text-pink"
           >
             {item.label}
           </a>
         ))
       }
-      <a
-        href={bookingHref}
-        class="rounded-md bg-accent px-3.5 py-2 font-medium text-accent-fg transition-colors hover:bg-accent-strong"
-      >
-        {ctaLabel}
-      </a>
+      <a href={bookingHref} class="btn btn-gradient btn-sm">{ctaLabel}</a>
     </nav>
 
     <details class="relative md:hidden">
-      <summary class="cursor-pointer list-none rounded-md border border-line px-3 py-1.5 text-sm select-none">Menu</summary>
-      <div class="absolute right-0 z-40 mt-2 flex w-56 flex-col gap-1 rounded-lg border border-line bg-bg p-2 shadow-lg">
+      <summary class="btn btn-outline btn-sm cursor-pointer list-none select-none">Menu</summary>
+      <div class="absolute right-0 z-40 mt-2 flex w-60 flex-col gap-1 rounded-xl border border-line-strong bg-bg p-2 shadow-2xl">
         {
           site.nav.map((item) => (
-            <a href={item.href} class="rounded-md px-3 py-2 text-sm hover:bg-surface">
+            <a href={item.href} class="rounded-lg px-3 py-2 font-bold transition-colors hover:bg-surface-2 hover:text-pink">
               {item.label}
             </a>
           ))
         }
-        <a href={bookingHref} class="mt-1 rounded-md bg-accent px-3 py-2 text-center text-sm font-medium text-accent-fg">
-          {ctaLabel}
-        </a>
+        <a href={bookingHref} class="btn btn-gradient mt-1">{ctaLabel}</a>
       </div>
     </details>
   </div>

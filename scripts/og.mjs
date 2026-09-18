@@ -5,23 +5,39 @@ import { writeFile } from 'node:fs/promises';
 import { site } from '../src/data/site.ts';
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const font = "Inter, 'Segoe UI', Arial, sans-serif";
+const font = "Nunito, 'Segoe UI', Arial, sans-serif";
 const initial = esc(site.name.trim().charAt(0).toUpperCase() || 'P');
 
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#4b5bd6"/>
-  <text x="32" y="45" text-anchor="middle" font-family="${font}" font-size="38" font-weight="700" fill="#ffffff">${initial}</text>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d512eb"/>
+      <stop offset="1" stop-color="#5a19ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <text x="32" y="46" text-anchor="middle" font-family="${font}" font-size="40" font-weight="900" fill="#ffffff">${initial}</text>
 </svg>
 `;
 
 const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#15171f"/>
-  <rect width="16" height="630" fill="#7c8cff"/>
-  <text x="96" y="140" font-family="${font}" font-size="32" fill="#a3a8bd">${esc(site.name)}</text>
-  <text x="96" y="290" font-family="${font}" font-size="76" font-weight="700" fill="#f5f5f7">Product marketing for</text>
-  <text x="96" y="380" font-family="${font}" font-size="76" font-weight="700" fill="#f5f5f7">technical products.</text>
-  <text x="96" y="470" font-family="${font}" font-size="30" fill="#a3a8bd">Positioning, launches, competitive intel and content</text>
-  <text x="96" y="514" font-family="${font}" font-size="30" fill="#a3a8bd">for AI, developer, QA and security companies.</text>
+  <defs>
+    <linearGradient id="t" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ac32e4"/>
+      <stop offset="1" stop-color="#5a19ff"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="50%" cy="0%" r="65%">
+      <stop offset="0" stop-color="#d512eb" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#d512eb" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#050507"/>
+  <rect width="1200" height="630" fill="url(#orb)"/>
+  <text x="96" y="140" font-family="${font}" font-size="30" font-weight="800" fill="#d512eb" letter-spacing="2">${esc(site.name.toUpperCase())}</text>
+  <text x="96" y="290" font-family="${font}" font-size="78" font-weight="900" fill="#ffffff">Product marketing for</text>
+  <text x="96" y="380" font-family="${font}" font-size="78" font-weight="900" fill="url(#t)">technical products.</text>
+  <text x="96" y="470" font-family="${font}" font-size="30" font-weight="600" fill="#a1adc4">Positioning, launches, competitive intel and content</text>
+  <text x="96" y="514" font-family="${font}" font-size="30" font-weight="600" fill="#a1adc4">for AI, developer, QA and security companies.</text>
 </svg>`;
 
 await writeFile('public/favicon.svg', favicon);
