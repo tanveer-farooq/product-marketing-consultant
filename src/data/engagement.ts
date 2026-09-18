@@ -45,6 +45,6 @@ export const faq = [
   },
   {
     q: 'Where are you based and what hours do you keep?',
-    a: '[City, time zone]. I work with teams in [regions] and keep [overlap hours].', // TODO
+    a: 'Delhi, India (IST, UTC+5:30). I work with teams in North America and Europe and adjust my hours to overlap with yours.',
   },
 ];

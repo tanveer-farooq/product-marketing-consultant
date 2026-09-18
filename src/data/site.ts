@@ -9,8 +9,8 @@ export const site = {
   description:
     'Freelance product marketer for technical products. Positioning, launches, competitive intel and SEO / AI-search content for AI, developer-tool, QA and security companies.',
   email: 'tanveer.insights@gmail.com', // TODO: confirm this is the address you want published
-  location: '[City, Country]', // TODO
-  regions: '[North America and Europe]', // TODO: where your clients are / the time zones you overlap
+  location: 'Delhi, India',
+  regions: 'North America and Europe',
   booking: '', // TODO: e.g. 'https://cal.com/yourhandle/intro'. Empty falls back to email.
   linkedin: '', // TODO: e.g. 'https://www.linkedin.com/in/yourhandle/'
   headshot: '', // TODO: e.g. '/headshot.jpg' placed in public/. Empty shows a monogram.
