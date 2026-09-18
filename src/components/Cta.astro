@@ -20,9 +20,11 @@ const {
       <p class="mt-4 max-w-xl text-lg opacity-80">{body}</p>
       <div class="mt-8 flex flex-wrap items-center gap-4">
         <Button href={bookingHref}>{ctaLabel}</Button>
-        <a href={`mailto:${site.email}`} class="text-base font-medium underline-offset-4 hover:underline">
-          or email {site.email}
-        </a>
+        {site.booking && (
+          <a href={`mailto:${site.email}`} class="text-base font-medium underline-offset-4 hover:underline">
+            or email {site.email}
+          </a>
+        )}
       </div>
     </div>
   </div>

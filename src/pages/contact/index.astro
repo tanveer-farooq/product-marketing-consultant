@@ -24,7 +24,11 @@ const redirect = new URL('/contact/thanks/', Astro.site).href;
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
           <Button href={bookingHref}>{ctaLabel}</Button>
-          <Button href={`mailto:${site.email}`} variant="secondary">Email {site.email}</Button>
+          {site.booking && (
+            <Button href={`mailto:${site.email}`} variant="secondary">
+              Email {site.email}
+            </Button>
+          )}
         </div>
       </div>
 
