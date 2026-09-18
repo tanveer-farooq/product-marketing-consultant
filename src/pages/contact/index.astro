@@ -2,10 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import Button from '../../components/Button.astro';
 import { site, bookingHref, ctaLabel } from '../../data/site';
+import { abs } from '../../lib/url';
 
 const needs = ['Positioning', 'Launch', 'Competitive intel', 'Content and SEO', 'Fractional PMM', 'Not sure yet'];
 const timing = ['This month', 'Next quarter', 'Just exploring'];
-const redirect = new URL('/contact/thanks/', Astro.site).href;
+const redirect = abs('/contact/thanks/', Astro.site);
 ---
 
 <Base

@@ -2,6 +2,7 @@
 import Button from './Button.astro';
 import { services } from '../data/services';
 import { bookingHref, ctaLabel } from '../data/site';
+import { href } from '../lib/url';
 
 const sprint = services.find((s) => s.entry) ?? services[0];
 const highlights = [
@@ -32,6 +33,6 @@ const highlights = [
   <p class="mt-5 text-sm font-extrabold">{sprint.price}</p>
   <div class="mt-5 flex flex-wrap gap-3">
     <Button href={bookingHref} variant="violet">{ctaLabel}</Button>
-    <a href={`/services/#${sprint.id}`} class="btn btn-outline">Everything included</a>
+    <a href={href(`/services/#${sprint.id}`)} class="btn btn-outline">Everything included</a>
   </div>
 </div>

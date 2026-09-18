@@ -5,6 +5,7 @@ import Base from '../../layouts/Base.astro';
 import Cta from '../../components/Cta.astro';
 import { segments } from '../../data/segments';
 import { getWork } from '../../lib/content';
+import { href } from '../../lib/url';
 
 export const getStaticPaths = (async () => {
   const entries = await getWork();
@@ -23,7 +24,7 @@ const d = entry.data;
     <div class="container-site">
       <header class="max-w-3xl">
         <p class="text-sm font-bold text-muted">
-          <a href="/work/" class="transition-colors hover:text-pink">Work</a> / <span class="text-pink">{segments[d.segment]}</span>{d.draft && ' / Draft'}
+          <a href={href('/work/')} class="transition-colors hover:text-pink">Work</a> / <span class="text-pink">{segments[d.segment]}</span>{d.draft && ' / Draft'}
         </p>
         <h1 class="mt-4 text-4xl md:text-5xl">{d.title}</h1>
         <p class="mt-5 text-lg text-muted">{d.summary}</p>

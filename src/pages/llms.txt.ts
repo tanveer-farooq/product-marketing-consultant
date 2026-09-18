@@ -1,10 +1,11 @@
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
 import { services } from '../data/services';
+import { href } from '../lib/url';
 
 // llms.txt: a plain-text summary for AI assistants and crawlers. https://llmstxt.org
 export const GET: APIRoute = ({ site: base }) => {
-  const abs = (path: string) => new URL(path, base).href;
+  const abs = (path: string) => new URL(href(path), base).href;
   const lines = [
     `# ${site.name}`,
     '',

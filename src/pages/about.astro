@@ -4,6 +4,7 @@ import Button from '../components/Button.astro';
 import Cta from '../components/Cta.astro';
 import JsonLd from '../components/JsonLd.astro';
 import { site, bookingHref, ctaLabel } from '../data/site';
+import { abs } from '../lib/url';
 
 const lessons = [
   "Positioning comes from interviews, not brainstorms. The customer's alternative tells you what to say.",
@@ -27,7 +28,7 @@ const person = {
   name: site.name,
   jobTitle: 'Product marketing consultant',
   description: site.description,
-  url: new URL('/about/', Astro.site).href,
+  url: abs('/about/', Astro.site),
   email: `mailto:${site.email}`,
   ...(site.linkedin ? { sameAs: [site.linkedin] } : {}),
 };

@@ -5,6 +5,7 @@ import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { href } from '../lib/url';
 
 interface Props {
   title: string;
@@ -24,10 +25,10 @@ const { title, description, type = 'website', image, fullTitle = false, noindex 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#050507" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="alternate" type="application/rss+xml" title={`${site.name}: Writing`} href="/rss.xml" />
+    <link rel="icon" href={href('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={href('/favicon-32.png')} type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href={href('/apple-touch-icon.png')} />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name}: Writing`} href={href('/rss.xml')} />
     <meta name="generator" content={Astro.generator} />
     <Seo {title} {description} {type} {image} {fullTitle} {noindex} />
     <slot name="head" />

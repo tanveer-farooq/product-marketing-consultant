@@ -1,5 +1,6 @@
 ---
 import type { Service } from '../data/services';
+import { href } from '../lib/url';
 
 interface Props {
   service: Service;
@@ -8,7 +9,7 @@ interface Props {
 const { service } = Astro.props;
 ---
 
-<a href={`/services/#${service.id}`} class="card card-hover card-flip relative flex flex-col p-6">
+<a href={href(`/services/#${service.id}`)} class="card card-hover card-flip relative flex flex-col p-6">
   <span class="text-3xl" aria-hidden="true">{service.emoji}</span>
   {service.pillar && <p class="mt-4 text-xs font-extrabold tracking-wide text-pink uppercase">{service.pillar}</p>}
   <h3 class="mt-1 text-xl">{service.name}</h3>

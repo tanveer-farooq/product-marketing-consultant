@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { segments } from '../data/segments';
+import { href } from '../lib/url';
 
 interface Props {
   entry: CollectionEntry<'work'>;
@@ -10,7 +11,7 @@ const { entry } = Astro.props;
 const { title, client, segment, summary, outcomes, draft } = entry.data;
 ---
 
-<a href={`/work/${entry.id}/`} data-segment={segment} class="card card-hover flex flex-col p-6">
+<a href={href(`/work/${entry.id}/`)} data-segment={segment} class="card card-hover flex flex-col p-6">
   <p class="text-xs font-extrabold tracking-wide text-pink uppercase">
     {segments[segment]}{draft && ' · Draft'}
   </p>

@@ -5,12 +5,13 @@ import JsonLd from '../components/JsonLd.astro';
 import { site } from '../data/site';
 import { services } from '../data/services';
 import { faq } from '../data/engagement';
+import { abs } from '../lib/url';
 
 const ld = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: `${site.name}: product marketing for technical products`,
-  url: new URL('/services/', Astro.site).href,
+  url: abs('/services/', Astro.site),
   description: site.description,
   provider: { '@type': 'Person', name: site.name },
   hasOfferCatalog: {

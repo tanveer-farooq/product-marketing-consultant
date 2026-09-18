@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { formatDate } from '../lib/content';
+import { href } from '../lib/url';
 
 interface Props {
   post: CollectionEntry<'writing'>;
@@ -14,7 +15,7 @@ const { post } = Astro.props;
     <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>{post.data.draft && ' · Draft'}
   </p>
   <h3 class="mt-2 text-xl">
-    <a href={`/writing/${post.id}/`} class="transition-colors hover:text-pink">{post.data.title}</a>
+    <a href={href(`/writing/${post.id}/`)} class="transition-colors hover:text-pink">{post.data.title}</a>
   </h3>
   <p class="mt-2 text-muted">{post.data.description}</p>
 </article>

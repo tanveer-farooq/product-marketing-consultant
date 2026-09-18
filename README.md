@@ -41,3 +41,15 @@ Personal site and portfolio for a freelance product marketing consultant serving
 ## Deploy on Cloudflare Pages
 
 Push the repo to GitHub (private is fine). In Cloudflare Pages, connect the repo with framework preset Astro, build command `npm run build`, output directory `dist`. Add the custom domain in the Pages project and turn on the www to apex redirect. Paste the Cloudflare Web Analytics token into `src/data/site.ts` to enable analytics. Vercel and Netlify work the same way with the Astro preset.
+
+## Live deployment (GitHub Pages)
+
+Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to
+https://tanveer-farooq.github.io/product-marketing-consultant/ as a GitHub Pages project site. On GitHub Actions the
+config sets `site` and `base` for that URL automatically; locally the site still runs at the root.
+
+Internal links go through `href()` and `abs()` in `src/lib/url.ts` so they pick up the base path. Use them for any new
+link instead of writing `/about/` directly.
+
+To move to a custom domain, set `SITE_URL` and `BASE_PATH=/` as build environment variables (or change the defaults in
+`astro.config.mjs`), add the domain in the Pages settings, and commit a `public/CNAME` file containing the domain.

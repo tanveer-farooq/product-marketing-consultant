@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import { href } from '../lib/url';
 
 const year = new Date().getFullYear();
 ---
@@ -14,13 +15,13 @@ const year = new Date().getFullYear();
     <nav aria-label="Footer" class="grid grid-cols-2 gap-2 text-sm font-bold">
       {
         site.nav.map((item) => (
-          <a href={item.href} class="text-muted transition-colors hover:text-pink">
+          <a href={href(item.href)} class="text-muted transition-colors hover:text-pink">
             {item.label}
           </a>
         ))
       }
-      <a href="/contact/" class="text-muted transition-colors hover:text-pink">Contact</a>
-      <a href="/rss.xml" class="text-muted transition-colors hover:text-pink">RSS</a>
+      <a href={href('/contact/')} class="text-muted transition-colors hover:text-pink">Contact</a>
+      <a href={href('/rss.xml')} class="text-muted transition-colors hover:text-pink">RSS</a>
     </nav>
 
     <div class="text-sm text-muted">

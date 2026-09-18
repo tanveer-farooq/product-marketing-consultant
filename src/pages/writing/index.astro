@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
 import Cta from '../../components/Cta.astro';
 import { getPosts } from '../../lib/content';
+import { href } from '../../lib/url';
 
 const posts = await getPosts();
 ---
@@ -17,7 +18,7 @@ const posts = await getPosts();
       <h1 class="text-5xl md:text-6xl">Teardowns and <span class="text-gradient">notes</span> ✍️</h1>
       <p class="mt-5 max-w-2xl text-lg text-muted">
         Positioning teardowns and notes on marketing technical products.
-        <a href="/rss.xml" class="font-bold text-pink underline-offset-4 hover:underline">RSS</a>
+        <a href={href('/rss.xml')} class="font-bold text-pink underline-offset-4 hover:underline">RSS</a>
       </p>
 
       <div class="mt-10 grid max-w-3xl gap-4">

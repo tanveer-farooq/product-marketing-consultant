@@ -14,6 +14,7 @@ import { site, bookingHref, ctaLabel } from '../data/site';
 import { coreServices } from '../data/services';
 import { engagementSteps } from '../data/engagement';
 import { getWork, getPosts } from '../lib/content';
+import { href, abs } from '../lib/url';
 
 const featured = (await getWork()).filter((w) => w.data.featured).slice(0, 3);
 const posts = (await getPosts()).slice(0, 3);
@@ -49,7 +50,7 @@ const person = {
   name: site.name,
   jobTitle: 'Product marketing consultant',
   description: site.description,
-  url: Astro.site?.href,
+  url: abs('/', Astro.site),
   email: `mailto:${site.email}`,
   ...(site.linkedin ? { sameAs: [site.linkedin] } : {}),
 };
@@ -78,7 +79,7 @@ const person = {
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
           <Button href={bookingHref} size="lg">{ctaLabel}</Button>
-          <Button href="/work/" variant="outline" size="lg">See the work</Button>
+          <Button href={href('/work/')} variant="outline" size="lg">See the work</Button>
         </div>
       </div>
       <OfferCard />
@@ -152,7 +153,7 @@ const person = {
     <div class="grid gap-5 text-left md:grid-cols-2 lg:grid-cols-4">
       {coreServices.map((s) => <ServiceCard service={s} />)}
     </div>
-    <p class="mt-10"><a href="/services/" class="btn btn-gradient btn-lg">All services and pricing</a></p>
+    <p class="mt-10"><a href={href('/services/')} class="btn btn-gradient btn-lg">All services and pricing</a></p>
   </Section>
 
   <Section title="How an engagement runs 🚀" center>
@@ -182,7 +183,7 @@ const person = {
           ))}
         </div>
         <p class="mt-10">
-          <a href="/work/" class="btn btn-outline btn-lg">
+          <a href={href('/work/')} class="btn btn-outline btn-lg">
             All case studies
           </a>
         </p>
@@ -199,7 +200,7 @@ const person = {
         copy they do not trust. That is the work I now do for technical companies that cannot hire a full-time PMM yet.
       </p>
       <p class="mt-6">
-        <a href="/about/" class="font-bold text-pink underline-offset-4 hover:underline">More about me →</a>
+        <a href={href('/about/')} class="font-bold text-pink underline-offset-4 hover:underline">More about me →</a>
       </p>
     </div>
   </Section>
@@ -215,7 +216,7 @@ const person = {
           ))}
         </div>
         <p class="mt-10">
-          <a href="/writing/" class="btn btn-outline">
+          <a href={href('/writing/')} class="btn btn-outline">
             All writing
           </a>
         </p>
